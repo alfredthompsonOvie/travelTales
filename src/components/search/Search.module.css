@@ -1,0 +1,136 @@
+.search__hero {
+	grid-column: 2;
+	max-width: 1200px;
+	width: 100%;
+	margin-inline: auto;
+	color: var(--secondary);
+	position: relative;
+	top: -8em;
+}
+:global(.flightPage) {
+	top: -3em;
+}
+.search__tab {
+	display: flex;
+	gap: 1em;
+	max-width: 300px;
+	padding: 1em;
+	border-top-left-radius: 0.8em;
+	border-top-right-radius: 0.8em;
+	background-color: var(--background-glass);
+	backdrop-filter: blur(10px);
+}
+
+/* .search__tab button {
+	border-radius: 0.5em;
+	background-color: var(--background);
+	color: var(--text);
+	padding: 0.8em 2em;
+
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+} */
+
+.icon {
+	transform: rotate(45deg);
+	font-size: 1.2em;
+}
+.formContainers {
+	padding: 1em;
+	background-color: var(--background-glass);
+	backdrop-filter: blur(10px);
+
+	border-bottom-left-radius: 0.8em;
+	border-bottom-right-radius: 0.8em;
+	border-radius: 0.8em;
+}
+.formContainers__form {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	flex-wrap: wrap;
+}
+.form__group {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	padding: 0 1em;
+}
+
+.form__control {
+	display: flex;
+	flex-direction: column;
+		flex: 1;
+}
+
+.form__control label {
+	font-weight: 600;
+}
+.form__control input {
+	padding: 1em;
+	border: 0;
+	background-color: var(--background-glass);
+	border-radius: 5em;
+}
+
+
+.SearchFormFooter{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 2em;
+	width: 100%;
+	margin-top: 1em;
+}
+
+/* !RADIO */
+
+.radioContainer {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	flex-wrap: wrap;
+}
+.radioFormGroups {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+}
+.form__group__radio {
+	position: relative;
+}
+.form__group__radio label{
+	background-color: var(--background-glass);
+	padding: .5em 1em;
+	cursor: pointer;
+	border-radius: 5em;
+	font-size: .8rem;
+}
+.form__group__radio label:hover{
+	background-color: var(--background);
+	color: #fff;
+}
+.form__group__radio input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	visibility: hidden;
+}
+.form__group__radio input:checked + label{
+	background-color: var(--background);
+	color: #fff;
+}
+
+
+.searchFormSubmit {
+	border-radius: 5em;
+	background-color: var(--background);
+	color: var(--text);
+	padding: 0.8em 2em;
+
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	align-self: end;
+}

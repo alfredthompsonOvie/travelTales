@@ -1,0 +1,138 @@
+
+.container {
+  padding: 5em 0;
+  grid-column: 2;
+
+  position: relative;
+}
+
+.formContainer {
+  max-width: 400px;
+  margin-inline: auto;
+
+}
+.formContainer h1{
+  font-size: 1rem;
+  color: var(--secondary);
+
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 1em;
+}
+.form__group__booking  {
+  position: relative;
+}
+.form__group__booking input, .form__group__booking textarea {
+  width: 100%;
+  padding: 1em;
+  padding-left: 2em;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.form__group__booking svg {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
+.form__group__booking  button {
+  width: 100%;
+  padding: 1em;
+  color: var(--text);
+  font-size: 1rem;
+  background-color: var(--secondary);
+  border: 1px solid transparent;
+  transition: all .3s ease;
+  border-radius: .5em;
+
+}
+.form__group__booking  button:hover {
+  background-color: transparent;
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+}
+.formCover {
+  background-color: red;
+  display: flex;
+  display: none;
+  border-radius: .5em;
+  overflow: hidden;
+}
+
+.modal {
+  grid-column: 1/-1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  display: grid;
+  place-content: center;
+
+}
+.modalContents {
+  background-color: #fff;
+  padding: 1em;
+  border-radius: .5em;
+  text-align: center;
+  max-width: 450px;
+  width: 100%;
+}
+.modalContents h1 {
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+.modalContents button {
+  font-size: 1rem;
+  text-transform: capitalize;
+  background-color: var(--background);
+  color: #fff;
+  padding: .7em 2em;
+  border-radius: .5em;
+  display: inline-block;
+  margin-top: 1em;
+  border: 1px solid transparent;
+  transition: all .3s ease;
+}
+.modalContents button:hover {
+  background-color: transparent;
+  border: 1px solid var(--background);
+  color: var(--background);
+}
+@media (min-width: 768px) {
+  .contents {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 1em;
+    max-width: 850px;
+    margin-inline: auto;
+  }
+  .formCover {
+    background-color: red;
+    display: flex;
+
+  }
+  .formCover img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+  }
+  .formContainer {
+    max-width: initial;
+    margin-inline: 0;
+  }
+}
+@media (min-width: 800px) {
+  .contents {
+    gap: 2em;
+  }
+
+}

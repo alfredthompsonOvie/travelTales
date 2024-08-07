@@ -1,0 +1,126 @@
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	box-sizing: border-box;
+
+	--background: #312c51;
+	--secondary: #48426d;
+	--primary: #f0c38e;
+	--accent: #f1aa9b;
+
+	--background: #006270;
+	--secondary: #009394;
+	--primary: #00e0c7;
+	--accent: #fff;
+
+	--background: #2d3250;
+	--secondary: #424769;
+	--primary: #676f9d;
+	--accent: #f9b17a;
+	--text: #fff;
+
+	--background: #001b48;
+	--secondary: #02457a;
+	--primary: #018abe;
+	--accent: #97cadb;
+	--text: #d6e8ee;
+
+	/* --background: #47466d;
+  --secondary: #3d84a7;
+  --primary: #46cdcf;
+  --accent: #abedd8;
+  --text: #fff; */
+
+	--background-card: #051423;
+	--background-card: #004890;
+	--background-glass: #86e5ff4d;
+
+
+	/* #0081C9
+#5BC0F8
+#86E5FF
+#FFC93C */
+}
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+button {
+	background-color: transparent;
+	border: 0;
+	cursor: pointer;
+}
+img {
+	max-width: 100%;
+}
+ul {
+	list-style: none;
+}
+
+body {
+	/* background-color: var(--background); */
+}
+.layout {
+	max-width: 1440px;
+	margin-inline: auto;
+	/* background-color: var(--background); */
+}
+.main {
+	min-height: 70vh;
+}
+.detailspage {
+	grid-column: 1/-1;
+}
+.bookingPageContainer {
+	display: grid;
+	grid-template-columns: 1fr 10fr 1fr;
+	grid-template-rows: auto;
+}
+.bookingPageContainer header {
+	grid-column: 2;
+	padding: 5em 0 0;
+	max-width: 500px;
+}
+.bookingPageContainer header h1 {
+	font-size: 2rem;
+}
+/* !========================================================= */
+/* !========================================================= */
+/* !========================================================= */
+/* !========================================================= */
+/* !========================================================= */
+/* !========================================================= */
+.swiper {
+  width: 100%;
+  height: 100%;
+	/* background-color: green; */
+	padding: 1em 0 3em;
+}
+
+.swiper-slide {
+  /* text-align: center; */
+  /* font-size: 18px; */
+  /* background-color: #fff; */
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+	/* flex: 1; */
+  /* align-items: flex-start; */
+
+	/* width: 100%; */
+	/* overflow: hidden; */
+
+	/* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1em;
+  grid-template-rows: auto; */
+}
