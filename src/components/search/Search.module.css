@@ -21,6 +21,7 @@
 	backdrop-filter: blur(10px);
 }
 
+/* ! a feature i could implement later (to switch between searching for flight plan and hotels/tour_destination */
 /* .search__tab button {
 	border-radius: 0.5em;
 	background-color: var(--background);
@@ -79,6 +80,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+	flex-wrap: wrap;
 	gap: 2em;
 	width: 100%;
 	margin-top: 1em;

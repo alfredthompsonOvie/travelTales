@@ -9,6 +9,7 @@ import { GiMoneyStack } from "react-icons/gi";
 import { MdOutlineStar } from "react-icons/md";
 
 import styles from "./Packages.module.css";
+import Rating from "../rating/Rating";
 
 function PackageList({ tourPackages, title, imgPath, link }) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -101,9 +102,7 @@ function PackageList({ tourPackages, title, imgPath, link }) {
 							<section className={styles.card__header}>
 								<img src={`${imgPath}/${tour_package.image_url}`} alt="" />
 
-								<span>
-									{tour_package.rating} <MdOutlineStar />
-								</span>
+								<Rating rating={tour_package.rating} />
 							</section>
 							<section className={styles.card__body}>
 								<h1>

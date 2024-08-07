@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Hamburger from "./Hamburger";
-import "./navbar.css";
-import Cta from "../buttons/Cta";
+import Brand from "../links/brand/Brand";
+import Cta from "../links/cta/Cta";
+
+import styles from './Navbar.module.css'
+
 
 const SCREEN_SIZE = 820;
 
@@ -41,31 +44,28 @@ function Navbar({ mode }) {
 		);
 	}, []);
 	return (
-		<nav className={`nav ${mode ? "fixedNav" : ""}`}>
-			<section className="navContents">
-				<Link to="/" className="brand">
-					{" "}
-					Travel<span>Tales</span>{" "}
-				</Link>
+		<nav className={`${styles.nav} ${mode ? "fixedNav" : ""}`}>
+			<section className={styles.navContents}>
+				<Brand />
 
-				<ul className={`menu ${!isOpen ? "closeMenu" : ""}`}>
+				<ul className={`${styles.menu} ${!isOpen ? "closeMenu" : ""}`}>
 					<li>
-						<NavLink className="navlink" to="/">
+						<NavLink className={styles.navlink} to="/">
 							Home
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="navlink" to="/app/destinations">
+						<NavLink className={styles.navlink} to="/app/destinations">
 							Destinations
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="navlink" to="/app/hotels">
+						<NavLink className={styles.navlink} to="/app/hotels">
 							Hotels
 						</NavLink>
 					</li>
 					<li>
-						<NavLink className="navlink" to="/app/flights">
+						<NavLink className={styles.navlink} to="/app/flights">
 							Flights
 						</NavLink>
 					</li>

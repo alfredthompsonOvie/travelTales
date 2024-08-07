@@ -1,4 +1,3 @@
-import Search from "../components/search/Search";
 import Banner from "../components/ui/banner/Banner";
 import FlightPackages from "../components/views/flightpage/FlightPackages";
 

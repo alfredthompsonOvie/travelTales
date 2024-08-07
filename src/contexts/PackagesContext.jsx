@@ -104,10 +104,6 @@ function PackagesProvider({ children }) {
 				([key, value]) => value !== "" && value !== null && value !== undefined
 			)
 		);
-		// console.log(filteredQuery);
-
-		
-
 
 		// dispatch({ type: "flights/updated", payload: filteredArray });
 		dispatch({ type: "flightsSearch/updated", payload: filteredQuery });

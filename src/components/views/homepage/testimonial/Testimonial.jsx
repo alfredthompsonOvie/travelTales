@@ -63,41 +63,6 @@ function Testimonial({ testimonials, detailspage, isLoading }) {
 					</SwiperSlide>)}
 					
 				</Swiper>
-				{/* 
-        
-        <section className="card__testi">
-          <header>
-            <img src="/img1.jpg" alt="" className="avatar" />
-            <section className="profile">
-              <h1>John Smith</h1>
-              <p>tourist</p>
-            </section>
-            <p className="testi__rating">3.5</p>
-          </header>
-          <p className="testimonial">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quibusdam officia maiores asperiores distinctio nulla quidem fugit est laudantium ipsum debitis cupiditate, provident, ducimus explicabo aspernatur dolores ratione? Facilis, architecto.</p>
-        </section>
-        <section className="card__testi">
-          <header>
-            <img src="/img1.jpg" alt="" className="avatar" />
-            <section className="profile">
-              <h1>John Smith</h1>
-              <p>tourist</p>
-            </section>
-            <p className="testi__rating">3.5</p>
-          </header>
-          <p className="testimonial">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quibusdam officia maiores asperiores distinctio nulla quidem fugit est laudantium ipsum debitis cupiditate, provident, ducimus explicabo aspernatur dolores ratione? Facilis, architecto.</p>
-        </section>
-        <section className="card__testi">
-          <header>
-            <img src="/img1.jpg" alt="" className="avatar" />
-            <section className="profile">
-              <h1>John Smith</h1>
-              <p>tourist</p>
-            </section>
-            <p className="testi__rating">3.5</p>
-          </header>
-          <p className="testimonial">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quibusdam officia maiores asperiores distinctio nulla quidem fugit est laudantium ipsum debitis cupiditate, provident, ducimus explicabo aspernatur dolores ratione? Facilis, architecto.</p>
-        </section> */}
 			</section>
 		</section>
 	);

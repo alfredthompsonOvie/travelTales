@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import styles from './Hamburger.module.css'
 
 const SCREEN_SIZE = 820;
 
@@ -27,10 +28,10 @@ function Hamburger({ onToggleMenu, isOpen }) {
   return (
     <>
       {isMobile ? (
-        <div className={`wrapper-menu ${isOpen ? "open" : ""}`} onClick={handleClick}>
-          <div className="line-menu half start"></div>
-          <div className="line-menu"></div>
-          <div className="line-menu half end"></div>
+        <div className={`${styles.wrapperMenu} ${isOpen ? "open" : ""}`} onClick={handleClick}>
+          <div className={`${styles.lineMenu} ${styles.half} ${styles.start}`}></div>
+          <div className={styles.lineMenu}></div>
+          <div className={`${styles.lineMenu} ${styles.half} ${styles.end}`}></div>
         </div>
       ) : null}
     </>

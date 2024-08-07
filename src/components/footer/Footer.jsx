@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import Brand from "../brand/Brand";
+import Brand from "../links/brand/Brand";
+import Cta from "../links/cta/Cta";
 
 import styles from "./Footer.module.css";
-import Cta from "../buttons/Cta";
 
 function Footer() {
 	return (

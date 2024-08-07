@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-import "./cta.css";
+import styles from './Cta.module.css'
 function Cta({children }) {
   return (
-    <Link className="cta" to="/app/bookings">
+    <Link className={styles.cta} to="/app/bookings">
       {children}
     </Link>
   )

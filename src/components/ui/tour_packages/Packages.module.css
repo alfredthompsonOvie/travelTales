@@ -86,13 +86,12 @@
   position: relative;
   height: 200px;
   overflow: hidden;
-  /* background-color: red; */
   display: flex;
 }
 .card__header img{
   width: 100%;
 }
-.card__header span{
+.card__header p {
   position: absolute;
   top: .5em;
   right: 1em;

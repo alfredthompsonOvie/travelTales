@@ -1,0 +1,28 @@
+.rating {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .1em;
+  border: 0;
+  background-color: #fff;
+  padding: .4em .8em;
+  border-radius: 5em;
+  z-index: 10;
+  line-height: 1;
+}
+
+.details {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+  align-self: start;
+  position: relative;
+  top: .6em;
+  right: .8em; 
+}
+.rating svg{
+  color: gold;
+}

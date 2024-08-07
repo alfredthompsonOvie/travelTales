@@ -1,62 +1,28 @@
 /* eslint-disable react/prop-types */
-// import { useHotels } from "../../contexts/HotelsContext";
-
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { usePackages } from "../../contexts/PackagesContext";
 
 import styles from "./Search.module.css";
 
-// import { IoMdAirplane } from "react-icons/io";
-// import { FaHotel } from "react-icons/fa6";
-// import { FaLocationDot } from "react-icons/fa6";
-
-// import { FaRegUser } from "react-icons/fa";
-
-// import { IoCalendarNumberOutline } from "react-icons/io5";
-// import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { usePackages } from "../../contexts/PackagesContext";
 
 function Search({ page }) {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { searchFlight } = usePackages();
 	const { register, handleSubmit, reset } = useForm();
-	// const { getCoords } = useHotels();
-
-	//   Search & Book Cheap Flights
-	// Book cheap and affordable local and international flight deals only on the Aspom Travel Website.
-	// BOOK NOW
-
-	//   Exciting Family Tour Packages On Budget
-	// We have packages specially crafted for your family vacation needs. You can also request for a customized package that suites you.
-	// SEE TOURS
-
-	// ! search for flights and hotels
-
-	// function handleSubmit(e) {
-	// 	e.preventDefault();
-
-	// 	console.log(location)
-
-	// 	if (location.pathname !== "/app/flights") {
-	// 		console.log("not in app/flights")
-	// 		navigate("/app/flights");
-	// 	}
-	// }
 
 	const onSubmit = (data) => {
-
 		/*
 		NOTE: The displayed date format will differ from the actual value — the displayed date is formatted based on the locale of the user's browser, but the parsed value is always formatted yyyy-mm-dd.
 		*/ 
-		// console.log(data);
 		searchFlight(data);
 
+		// navigate to flight page on if you're not in flight page
 		if (location.pathname !== "/app/flights") {
-			console.log("not in app/flights");
 			navigate("/app/flights");
 		}
-
+	//this resets the input values it default value.
 		reset();
 	};
 
@@ -66,6 +32,7 @@ function Search({ page }) {
 				page === "flightPage" ? "flightPage" : ""
 			}`}
 		>
+			{/* A feature i could implement later (to switch between searching for flight plan and hotels/tour_destination */}
 			{/* <section className="search__tab">
 				<button onClick={()=> setFormType("flights")}>
 					<span className="icon">

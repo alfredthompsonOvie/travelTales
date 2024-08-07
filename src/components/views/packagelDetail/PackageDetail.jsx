@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import { GoChecklist } from "react-icons/go";
-
 import { GiCheckMark } from "react-icons/gi";
-
-import { usePackages } from "../../../contexts/PackagesContext";
-
-import styles from "./PackageDetail.module.css";
-import BookingForm from "../../ui/bookingForm/BookingForm";
 import { MdOutlineStar } from "react-icons/md";
-import Testimonial from "../homepage/testimonial/Testimonial";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
+
+import { usePackages } from "../../../contexts/PackagesContext";
+
+import BookingForm from "../../ui/bookingForm/BookingForm";
+import Testimonial from "../homepage/testimonial/Testimonial";
 import BackButton from "../../buttons/backButton/BackButton";
+
+import styles from "./PackageDetail.module.css";
+import Rating from "../../ui/rating/Rating";
 
 function PackageDetail() {
 	const { packages, isLoading,setFavourite } = usePackages();
@@ -30,7 +30,7 @@ function PackageDetail() {
 		const dataArr = packages[type]?.filter(
 			(item) => Number(item.id) === idd
 		)[0];
-console.log("path",path)
+
 		setData(dataArr);
 		setTestimonials(dataArr?.reviews);
 	}, [id, type,packages, path]);
@@ -43,10 +43,8 @@ console.log("path",path)
 			<section className={styles.imgContainer}>
 				<section className={styles.mainDisplay}>
 					<img src={`/images/${type}/${data?.image_url}`} alt="" />
-					<section className={styles.rating}>
-						<span>{data?.review_score_word}</span>
-						<MdOutlineStar />
-					</section>
+
+					<Rating rating={ data?.review_score_word } mode="details"/>
 				</section>
 
 				{data?.gallery?.map((img) => (
@@ -122,9 +120,6 @@ console.log("path",path)
 						</section>
 					</section>
 				</section>
-
-				{/* <h1>Gallery</h1> */}
-				{/* <Gallery topDestinations={topDestinations} mode="" /> */}
 			</section>
 			<section className={styles.packageFooter}>
 				{!data?.description && (

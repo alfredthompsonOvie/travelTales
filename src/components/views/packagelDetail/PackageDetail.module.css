@@ -35,21 +35,19 @@
 .mainDisplay {
   grid-column: 1;
   grid-row: 1/-1;
-  overflow: hidden;
-  position: relative;
-}
-.rating {
-  position: absolute;
-  z-index: 10;
-  top: .5em;
-  right: .5em;
-  background-color: #fff;
-  padding: .2em 1.5em;
-  border-radius: 5em;
+  /* overflow: hidden; */
+  /* position: relative; */
   display: flex;
-  align-items: center;
-  gap: .5em;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
 }
+.mainDisplay img {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+
 .gallery:nth-of-type(1) {
   grid-column: span 2;
   grid-row: 1;

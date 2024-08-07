@@ -53,7 +53,8 @@ To get started with the project, follow these steps:
 
 - **Browse Destinations**: Navigate to the "Destinations" section to explore various travel locations.
 - **Book Tours**: Use the "Tours" page to view available tours and make reservations.
-- **Manage Account**: Sign up or log in to access account features and manage bookings.
+- **Browse Flight Plans**: Embark on your journey by exploring our comprehensive flight plans. Compare prices, view flight schedules, and book your next adventure with ease. Our interactive interface ensures you find the best deals and the most convenient flights.
+
 
 ## Contributing
 

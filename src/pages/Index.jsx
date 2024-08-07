@@ -1,5 +1,5 @@
-import Footer from "../components/footer/Footer";
 import Navbar from "../components/nav/Navbar";
+import Footer from "../components/footer/Footer";
 import Hero from "../components/views/homepage/hero/Hero";
 import TopDestinations from "../components/views/homepage/topDestinations/TopDestinations";
 import WhyChooseUs from "../components/views/homepage/whyChooseUs/WhyChooseUs";
@@ -7,7 +7,6 @@ import Testimonial from "../components/views/homepage/testimonial/Testimonial";
 
 import { useEffect, useState } from "react";
 import { usePackages } from "../contexts/PackagesContext";
-
 
 function Index() {
 	const { isLoading, packages } = usePackages();
@@ -22,9 +21,6 @@ function Index() {
 				(topDestination) => topDestination.rating > 4.7
 			);
 			setTopDestinations(destinations);
-		}
-
-		if (packages.hotels) {
 			const hotels = packages.hotels?.filter(
 				(topDestination) => topDestination.rating > 4.7
 			);
@@ -32,7 +28,6 @@ function Index() {
 			setTopHotels(hotels);
 		}
 	}, [packages, isLoading]);
-
 
 	return (
 		<>
@@ -44,10 +39,9 @@ function Index() {
 					places={topDestinations}
 					isLoading={isLoading}
 					title="Top Destinations"
-					link="/app/destinations"
+					linkPath="/app/destinations"
 					search={true}
 					imgPath="/images/destinations"
-					
 				/>
 
 				<WhyChooseUs />
@@ -56,11 +50,16 @@ function Index() {
 					places={topHotels}
 					isLoading={isLoading}
 					title="Top Hotels"
-					link="/app/hotels"
+					linkPath="/app/hotels"
 					imgPath="/images/hotels"
 				/>
 
-				<Testimonial testimonials={ testimonials } centered={ true} detailspage={false} isLoading={isLoading} />
+				<Testimonial
+					testimonials={testimonials}
+					centered={true}
+					detailspage={false}
+					isLoading={isLoading}
+				/>
 			</main>
 			<Footer />
 		</>

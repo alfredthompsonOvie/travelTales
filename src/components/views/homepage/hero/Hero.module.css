@@ -21,7 +21,6 @@
   grid-column: 2;
   grid-row: 1;
   align-self: center;
-  color: #000;
   color: var(--secondary);
 	background-color: var(--background-glass);
   backdrop-filter: blur(10px);
@@ -30,8 +29,8 @@
   border-radius: .5em;
 
   max-width: 600px;
-  margin-inline: auto;
   width: 100%;
+  margin-inline: auto;
   text-align: center;
 }
 .hero__contents p {

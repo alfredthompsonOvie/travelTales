@@ -1,0 +1,10 @@
+.notFound {
+  min-height: 50vh;
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
+  grid-template-rows: auto;
+}
+.contents {
+  grid-column: 2;
+  padding: 2em 0;
+}
