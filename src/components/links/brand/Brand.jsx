@@ -3,8 +3,8 @@ import styles from "./Brand.module.css";
 function Brand() {
 	return (
 		<Link to="/" className={styles.brand}>
-			{" "}
-			Travel<span>Tales</span>{" "}
+			<span>Travel</span>
+			<span>Tales</span>
 		</Link>
 	);
 }

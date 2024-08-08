@@ -70,7 +70,7 @@ function FlightDetails() {
 									</li>
 									<li>
 										<span>Class: </span>
-										<span>{selectedPackage[0].class}</span>
+										<span>{selectedPackage[0].service_tier}</span>
 									</li>
 									<li>
 										<span>Number of seats: </span>

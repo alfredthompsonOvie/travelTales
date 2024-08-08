@@ -9,7 +9,7 @@ import Destinations from "./pages/Destinations";
 import { PackagesProvider } from "./contexts/PackagesContext";
 
 import NotFound from "./pages/notFoundPage/NotFound";
-import PackageDetail from "./components/views/packagelDetail/PackageDetail";
+import PackageDetail from "./components/views/packageDetail/PackageDetail";
 import ScrollToTop from "./components/ScrollToTop";
 
 import ScrollRestoration from "./components/ScrollRestoration";

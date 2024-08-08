@@ -21,45 +21,6 @@
 	font-size: 1.5rem;
 }
 
-.btn {
-	display: flex;
-	align-items: center;
-	gap: 0.5em;
-	color: var(--text);
-	background-color: var(--background);
-	padding: 0.5em 2em;
-	font-size: 1rem;
-	border-radius: 0.3em;
-	border: 1px solid transparent;
-	transition: all 0.3s ease-in-out;
-}
-.btn:hover {
-	border-color: var(--background);
-	background-color: transparent;
-	color: var(--background);
-}
-
-.filterList {
-	display: flex;
-	flex-direction: column;
-	gap: 1em;
-	margin-top: 1em;
-	background-color: var(--background-glass);
-  backdrop-filter: blur(10px);
-	padding: 1em;
-	border-radius: 0.3em;
-	position: absolute;
-  right: 0;
-	z-index: 100;
-}
-.filterList button {
-  /* width: max-content;
-  display: block; */
-  width: 100%;
-  text-align: left;
-}
-
-
 .packageList {
   grid-column: 2;
   display: grid;
@@ -73,11 +34,12 @@
 }
 .card {
   border-radius: .3em;
-  /* width: 300px; */
   overflow: hidden;
-  /* background-color: var(--background-glass); */
   transition: all .3s ease;
 
+}
+:global(.card_size) {
+  width: 300px;
 }
 .card:hover {
   transform: translateY(-3px) scale(1.02);
@@ -135,28 +97,24 @@
   color: var(--primary);
 }
 
-.filterOptions {
-  /* padding: 1em; */
+/* .filterOptions {
   background-color: var(--primary);
   width: inherit !important;
   display: flex;
   flex-direction: column;
-  /* gap: 1em; */
   margin-top: .5em;
   border-radius: .5em;
 }
 .filterOptions button {
-  /* background-color: red; */
   width: initial;
   padding: 1em;
   color: #fff;
   transition: all .2s linear;
 }
 .filterOptions button:hover {
-  /* background-color: red; */
   width: initial;
   padding: 1em;
   color: #fff;
   font-weight: 700;
 
-}
+} */

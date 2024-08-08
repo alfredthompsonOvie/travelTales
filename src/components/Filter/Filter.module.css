@@ -1,0 +1,59 @@
+
+.btn {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	color: var(--text);
+	background-color: var(--background);
+	padding: 0.5em 2em;
+	font-size: 1rem;
+	border-radius: 0.3em;
+	border: 1px solid transparent;
+	transition: all 0.3s ease-in-out;
+}
+.btn:hover {
+	border-color: var(--background);
+	background-color: transparent;
+	color: var(--background);
+}
+
+.filterList {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	margin-top: 1em;
+	background-color: var(--background-glass);
+  backdrop-filter: blur(10px);
+	padding: 1em;
+	border-radius: 0.3em;
+	position: absolute;
+  right: 0;
+	z-index: 100;
+}
+.filterList button {
+  width: 100%;
+  text-align: left;
+}
+
+
+.filterOptions {
+  background-color: var(--primary);
+  width: inherit !important;
+  display: flex;
+  flex-direction: column;
+  margin-top: .5em;
+  border-radius: .5em;
+}
+.filterOptions button {
+  width: initial;
+  padding: 1em;
+  color: #fff;
+  transition: all .2s linear;
+}
+.filterOptions button:hover {
+  width: initial;
+  padding: 1em;
+  color: #fff;
+  font-weight: 700;
+
+}

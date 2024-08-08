@@ -6,9 +6,10 @@ const PackagesContext = createContext();
 const initialState = {
 	packages: [],
 	flights: [],
-	searchFlightBy: {},
+	searchFlightWithQuery: {},
 	isLoading: false,
 	error: "",
+	isFavorited: {},
 };
 
 function reducer(state, action) {
@@ -37,20 +38,25 @@ function reducer(state, action) {
 			return {
 				...state,
 				isLoading: false,
-				searchFlightBy: [],
+				searchFlightWithQuery: [],
 				flights: action.payload,
 			};
 		case "flightsSearch/updated":
 			return {
 				...state,
 				isLoading: false,
-				searchFlightBy: action.payload,
+				searchFlightWithQuery: action.payload,
 			};
-		case "flights/search":
+		case "flightsSearch/deleted":
+			return {
+				...state,
+				searchFlightWithQuery: {},
+			};
+		case "isFavorited/updated":
 			return {
 				...state,
 				isLoading: false,
-				searchFlightBy: action.payload,
+				isFavorited: action.payload,
 			};
 
 		default:
@@ -59,7 +65,7 @@ function reducer(state, action) {
 }
 
 function PackagesProvider({ children }) {
-	const [{ packages, flights, searchFlightBy, isLoading, error }, dispatch] =
+	const [{ packages, flights, searchFlightWithQuery, isLoading, error, isFavorited }, dispatch] =
 		useReducer(reducer, initialState);
 
 	useEffect(() => {
@@ -79,34 +85,37 @@ function PackagesProvider({ children }) {
 	}, []);
 
 	function setFavourite(category, id) {
-		console.log(id, category)
-		// const updatedPackages = [...packages, category: packages[category].map((item) => {
-			// 	if (item.id === id) {
-		// 		item.isFavourite = !item.isFavourite;
-		// 	}
 
-		// 	return item;
-		// })];
 		packages[category].forEach(data => {
 			if (data.id === id ) {
-				data.isFav = !data.isFav;
+				data.isFavourite = !data.isFavourite;
 			}
 		});
-		
-		console.log(packages)
 
 		// dispatch({ type: "packages/updated", payload: updatedPackages });
 	}
 
 	function searchFlight(query) {
-		const filteredQuery = Object.fromEntries(
+		const queryObj = Object.fromEntries(
 			Object.entries(query).filter(
 				([key, value]) => value !== "" && value !== null && value !== undefined
 			)
 		);
 
-		// dispatch({ type: "flights/updated", payload: filteredArray });
+		const { arrival_city, service_tier, departure_date } = queryObj;
+
+		const filteredQuery = {
+			...(arrival_city !== undefined && {arrival_city}),
+			...(service_tier !== undefined && {service_tier}),
+			...(departure_date !== undefined && {departure_date}),
+		} 
+		// console.log(filteredQuery)
+
 		dispatch({ type: "flightsSearch/updated", payload: filteredQuery });
+	}
+
+	function deleteSearchQuery() {
+		dispatch({ type: "flightsSearch/deleted" })
 	}
 
 	return (
@@ -114,11 +123,12 @@ function PackagesProvider({ children }) {
 			value={{
 				packages,
 				flights,
-				searchFlightBy,
+				searchFlightWithQuery,
 				searchFlight,
 				isLoading,
 				error,
-				setFavourite
+				setFavourite,
+				deleteSearchQuery
 			}}
 		>
 			{children}

@@ -56,7 +56,6 @@
   color: var(--secondary);
 }
 .formCover {
-  background-color: red;
   display: flex;
   display: none;
   border-radius: .5em;
@@ -115,7 +114,6 @@
     margin-inline: auto;
   }
   .formCover {
-    background-color: red;
     display: flex;
 
   }

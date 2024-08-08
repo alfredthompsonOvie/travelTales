@@ -2,54 +2,73 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { GoFilter } from "react-icons/go";
 import { CiClock2 } from "react-icons/ci";
 import { CiLocationOn } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
-import { MdOutlineStar } from "react-icons/md";
 
-import styles from "./Packages.module.css";
 import Rating from "../rating/Rating";
+import Filter from "../../Filter/Filter";
+import styles from "./Packages.module.css";
 
 function PackageList({ tourPackages, title, imgPath, link }) {
-	const [isOpen, setIsOpen] = useState(false);
-	const [isPackageTypesOpen, setIsPackageTypesOpen] = useState(false);
+	const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false); 
+	const [isFilterByPackageTypesOpen, setIsFilterByPackageTypesOpen] = useState(false);
+	// this sets the name of the type of filter eg all, package types, price(low) price(high)
+	const [filterBy, setFilterBy] = useState("Filter");
 
 	const [FilterTourPackages, setFilterTourPackages] = useState([]);
 
-	const packageType = tourPackages?.map(item=> item.package_type);
+	// const packageType = tourPackages?.map((item) => item.package_type);
+	const packageType = tourPackages?.map((item) => item.package_type)
+	.reduce((arr, item) => {
+		if (!arr.includes(item)) return [...arr, item];
+		return arr;
+	}, []);
 
-	useEffect(() => {
-		console.log("destinations Packages", tourPackages);
-		setFilterTourPackages(tourPackages)
-	}, [tourPackages]);
+
 
 	function handleFilterToggle() {
-		setIsOpen(!isOpen);
+		setIsFilterOptionsOpen(!isFilterOptionsOpen);
+		setIsFilterByPackageTypesOpen(false);
+	}
+	function handleTogglePackageTypesOptions() {
+		setIsFilterByPackageTypesOpen(!isFilterByPackageTypesOpen);
 	}
 	function handleFilterByPackageType(packageType) {
-		const tour = tourPackages.filter(tourByPackage => tourByPackage.package_type === packageType);
+		const tour = tourPackages.filter(
+			(tourByPackage) => tourByPackage.package_type === packageType
+		);
 
 		setFilterTourPackages(tour);
-		setIsOpen(false);
+		setIsFilterOptionsOpen(false);
+		setFilterBy("Package Type");
 	}
 
 	function handleFilterReset() {
-		setFilterTourPackages(tourPackages)
-		setIsOpen(false);
+		setFilterTourPackages(tourPackages);
+		setIsFilterOptionsOpen(false);
+		setFilterBy("Filter");
 	}
 	function handleFilterByLowestPrice() {
 		const sortedItems = tourPackages.slice().sort((a, b) => a.price - b.price);
 
-		setFilterTourPackages(sortedItems)
-		setIsOpen(false);
+		setFilterTourPackages(sortedItems);
+		setIsFilterOptionsOpen(false);
+		setFilterBy("Price (Low to High)");
 	}
 	function handleFilterByHighestPrice() {
 		const sortedItems = tourPackages.slice().sort((a, b) => b.price - a.price);
 
-		setFilterTourPackages(sortedItems)
-		setIsOpen(false);
+		setFilterTourPackages(sortedItems);
+		setIsFilterOptionsOpen(false);
+		setFilterBy("Price (High to Low)");
 	}
+
+
+	useEffect(() => {
+
+		setFilterTourPackages(tourPackages);
+	}, [tourPackages]);
 
 	return (
 		<section className={styles.container}>
@@ -57,48 +76,29 @@ function PackageList({ tourPackages, title, imgPath, link }) {
 				<header className={styles.header}>
 					<h1>Popular {title}</h1>
 
-					<section className={styles.filterContainer}>
-						<button className={styles.btn} onClick={handleFilterToggle}>
-							<GoFilter />
-							<span>Filter</span>
-						</button>
-						{isOpen && (
-							<section className={styles.listContainer}>
-								<ul className={styles.filterList}>
-									<li>
-										<button className={styles.btn} onClick={handleFilterReset}>
-											All
-										</button>
-									</li>
-									<li>
-										<button className={styles.btn} onClick={handleFilterByLowestPrice}>
-											<span>Price</span> <span>(low-high)</span>
-										</button>
-									</li>
-									<li>
-										<button className={styles.btn} onClick={handleFilterByHighestPrice}>
-											<span>Price</span> <span>(high-low)</span>
-										</button>
-									</li>
-									<li>
-										<button className={styles.btn} onClick={()=>setIsPackageTypesOpen(!isPackageTypesOpen)}>
-											<span>package type</span>
-										</button>
-										{isPackageTypesOpen && <section className={styles.filterOptions}>
-											{packageType.map((item, idx) => <button onClick={()=>handleFilterByPackageType(item)} key={idx}>{item}</button>)}
-										</section>}
-									</li>
-								</ul>
-							</section>
-						)}
-					</section>
+					<Filter
+						packageType={packageType}
+						filterBy={filterBy}
+						toggleFilterOptions={isFilterOptionsOpen}
+						togglePackageTypesOptions={isFilterByPackageTypesOpen}
+						onHandleTogglePackageTypesOptions={handleTogglePackageTypesOptions}
+						onHandleFilterToggle={handleFilterToggle}
+						onHandleFilterReset={handleFilterReset}
+						onHandleFilterByPackageType={handleFilterByPackageType}
+						onHandleFilterByHighestPrice={handleFilterByHighestPrice}
+						onHandleFilterByLowestPrice={handleFilterByLowestPrice}
+					/>
 				</header>
 			)}
 
 			<section className={styles.packageList}>
 				{FilterTourPackages?.map((tour_package) => (
 					<Link key={tour_package.id} to={`/app/${link}/${tour_package.id}`}>
-						<section className={styles.card}>
+						<section
+							className={`${styles.card} ${
+								FilterTourPackages?.length < 3 ? "card_size" : ""
+							}`}
+						>
 							<section className={styles.card__header}>
 								<img src={`${imgPath}/${tour_package.image_url}`} alt="" />
 

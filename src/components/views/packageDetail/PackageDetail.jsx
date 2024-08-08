@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GoChecklist } from "react-icons/go";
 import { GiCheckMark } from "react-icons/gi";
-import { MdOutlineStar } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
@@ -17,12 +16,16 @@ import styles from "./PackageDetail.module.css";
 import Rating from "../../ui/rating/Rating";
 
 function PackageDetail() {
-	const { packages, isLoading,setFavourite } = usePackages();
+	const { packages, isLoading, setFavourite } = usePackages();
 	const [data, setData] = useState({});
 	const [testimonials, setTestimonials] = useState([]);
 
 	const { type, id } = useParams();
 	const path = packages[type]?.id?.isFav;
+
+	function handleSetFavourite(category, id) {
+		setFavourite(category,id);
+	}
 
 
 	useEffect(() => {
@@ -68,7 +71,7 @@ function PackageDetail() {
 								<p>{data?.location}</p>
 							</section>
 							<section>
-								<button onClick={()=> setFavourite(type, data.id)} className={styles.isFavorite}>
+								<button onClick={()=> handleSetFavourite(type, data.id)} className={styles.isFavorite}>
 									{data?.isFavorite ? <IoMdHeart /> : <IoMdHeartEmpty />}
 								</button>
 							</section>

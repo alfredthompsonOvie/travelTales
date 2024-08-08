@@ -1,238 +1,240 @@
 import { useEffect, useState } from "react";
-import { usePackages } from "../../../contexts/PackagesContext";
-import Search from "../../search/Search";
-import styles from "./FlightPackages.module.css";
-import { GoFilter } from "react-icons/go";
-import { MdOutlineStar } from "react-icons/md";
-import { CiClock2, CiLocationOn } from "react-icons/ci";
-import { GiMoneyStack } from "react-icons/gi";
-import { IoClose } from "react-icons/io5";
-
-import { IoBriefcase } from "react-icons/io5";
-import { MdAirlineSeatReclineNormal } from "react-icons/md";
-import { MdFoodBank } from "react-icons/md";
-import { FaHandsHelping } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+import { GiMoneyStack } from "react-icons/gi";
+import { IoBriefcase } from "react-icons/io5";
+import { MdAirlineSeatReclineNormal } from "react-icons/md";
+import { CiLocationOn } from "react-icons/ci";
+
+import { usePackages } from "../../../contexts/PackagesContext";
+import Search from "../../search/Search";
+import Filter from "../../Filter/Filter";
+
+import styles from "./FlightPackages.module.css";
+import Message from "../../ui/message/Message";
+
+// old version
 // Helper function to compare values case-insensitively
-const caseInsensitiveEquals = (a, b) => {
-	if (typeof a === "string" && typeof b === "string") {
-		return a.toLowerCase() === b.toLowerCase();
-	}
-	return a === b;
-};
+// const caseInsensitiveEquals = (a, b) => {
+// 	if (typeof a === "string" && typeof b === "string") {
+// 		return a.toLowerCase() === b.toLowerCase();
+// 	}
+// 	return a === b;
+// };
 
 function FlightPackages() {
-	const { packages, searchFlightBy, searchFlight } = usePackages();
-
-	const [hasSearchQuery, setHasSearchQuery] = useState(
-		() => Object.values(searchFlightBy).length > 0
-	);
+	const { packages, searchFlightWithQuery, deleteSearchQuery } = usePackages();
+	const [hasSearchQuery, setHasSearchQuery] = useState(false);
+	const [isBackButton, setIsBackButton] = useState(false);
 	const [filteredFlights, setFilteredFlights] = useState([]);
 
-	const [isOpen, setIsOpen] = useState(false);
-	const [showPackageDetails, setShowPackageDetails] = useState(false);
-	const [selectedPackage, setSelectedPackage] = useState([]);
+	const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false); 
+	const [isFilterByPackageTypesOpen, setIsFilterByPackageTypesOpen] = useState(false);
 
-	// const hasSearchQuery = Object.values(searchFlightBy).length > 0;
+	// this sets the name of the type of filter eg all, package types, price(low) price(high)
+	const [filterBy, setFilterBy] = useState("Filter");
+
+	// here we create an array of on boarding class like business, economy, first class
+	const packageType = packages.flights?.map((item) => item.service_tier)
+		.reduce((arr, item) => {
+			if (!arr.includes(item)) return [...arr, item];
+			return arr;
+		}, []);
+
 
 	function handleFilterToggle() {
-		setIsOpen(!isOpen);
+		setIsFilterOptionsOpen(!isFilterOptionsOpen);
+		setIsFilterByPackageTypesOpen(false);
+	}
+	// for the flight class options like economy, business, first class
+	function handleTogglePackageTypesOptions() {
+		setIsFilterByPackageTypesOpen(!isFilterByPackageTypesOpen);
 	}
 	function handleFilterByPackageType(packageType) {
-		// const tour = tourPackages.filter(tourByPackage => tourByPackage.package_type === packageType);
+		const flights = packages.flights.filter(tourByPackage => tourByPackage.service_tier === packageType);
 
-		// setFilterTourPackages(tour);
-		setIsOpen(false);
+		setFilteredFlights(flights);
+		setIsFilterOptionsOpen(false);
+		setFilterBy("Package Type");
+		setIsBackButton(false);
 	}
 
 	function handleFilterReset() {
 		setFilteredFlights(packages.flights);
-
-		searchFlight({});
+		setIsFilterOptionsOpen(false);
+		setFilterBy("Filter");
 		setHasSearchQuery(false);
+		setIsBackButton(false);
+
+	}
+
+	function handleBackButtonReset() {
+		handleFilterReset();
+		setIsBackButton(false);
+		deleteSearchQuery();
 	}
 	function handleFilterByLowestPrice() {
-		// const sortedItems = tourPackages.slice().sort((a, b) => a.price - b.price);
+		const sortedFlights = packages.flights.slice().sort((a, b) => a.price - b.price);
 
-		// setFilterTourPackages(sortedItems)
-		setIsOpen(false);
+		setFilteredFlights(sortedFlights);
+		setIsFilterOptionsOpen(false);
+		setFilterBy("Price (Low to High)");
+		setIsBackButton(false);
+		
 	}
 	function handleFilterByHighestPrice() {
-		// const sortedItems = tourPackages.slice().sort((a, b) => b.price - a.price);
+		const sortedFlights = packages.flights.slice().sort((a, b) => b.price - a.price);
 
-		// setFilterTourPackages(sortedItems)
-		setIsOpen(false);
-	}
-	function handleSelectedPackage(id) {
-		const selected = filteredFlights.filter((item) => item.id === id);
-
-		setShowPackageDetails(true);
-		setSelectedPackage(selected);
-		console.log(selected);
-
-		// setFilterTourPackages(sortedItems)
-		// setIsOpen(false);
+		setFilteredFlights(sortedFlights);
+		setIsFilterOptionsOpen(false);
+		setFilterBy("Price (High to Low)");
+		setIsBackButton(false);
+		
 	}
 
-	// ! GET ALL FLIGHTS HERE
-	// ! GET SEARCHBY OBJ
-	// ! DIPLAY FILTEREDFILTER BY FIRST CHECKING IF THERE IS ANY SEARCH QUERY IF NOT DISPLAY ALL FLIGHTS
+	// old version
+	// useEffect(() => {
+	// 	setFilteredFlights(packages.flights);
 
-	useEffect(() => {
-		setFilteredFlights(packages.flights);
-		const hasNewQuery = Object.values(searchFlightBy).length > 0;
+	// 	const hasNewQuery = Object.values(searchFlightWithQuery).length > 0;
 
-		if (hasNewQuery) {
-			// filter function
-			const filteredArray = packages.flights.filter((obj) => {
-				return Object.entries(searchFlightBy).every(([key, value]) =>
-					caseInsensitiveEquals(obj[key], value)
-				);
-			});
-			setFilteredFlights(filteredArray);
-			setHasSearchQuery(true);
+	// 	if (hasNewQuery) {
+	// 		// filter function
+	// 		console.log(searchFlightWithQuery)
+
+	// 		const filteredArray = packages.flights.filter((obj) => {
+	// 			return Object.entries(searchFlightWithQuery).every(([key, value]) =>
+	// 				caseInsensitiveEquals(obj[key], value)
+	// 			);
+	// 		});
+	// 		setFilteredFlights(filteredArray);
+	// 		setIsBackButton(true);
+	// 	}
+
+	// }, [searchFlightWithQuery, packages.flights, hasSearchQuery]);
+
+
+	useEffect(() => { 
+		const containsAllProperties = (obj1, obj2) => {
+			return Object.keys(obj1).every(key => obj2[key].toLowerCase() === obj1[key].toLowerCase());
 		}
 
-		console.log(hasSearchQuery, searchFlightBy);
-	}, [searchFlightBy, packages.flights, hasSearchQuery]);
-	// display flights
-	// filter or search flights
+		const hasNewQuery = Object.values(searchFlightWithQuery).length > 0;
+
+		if (hasNewQuery) {
+
+			// filter the array; by checking if packages.flights has the properties from search query
+			const filteredArray = packages.flights.filter(obj => containsAllProperties(searchFlightWithQuery, obj));
+
+			setFilteredFlights(filteredArray);
+			setIsBackButton(true);
+			return;
+		}
+
+		setFilteredFlights(packages.flights)
+
+
+	}, [searchFlightWithQuery, packages.flights, hasSearchQuery])
+
+	
+
 	return (
 		<section className={styles.flightpackages}>
 			<Search page="flightPage" />
+
+			{filteredFlights?.length === 0 && <Message />}
 
 			<section className={styles.container}>
 				{filteredFlights?.length !== 0 && (
 					<header className={styles.header}>
 						<h1>Available Flights</h1>
 
-						<section className={styles.filterContainer}>
-							<button className={styles.btn} onClick={handleFilterToggle}>
-								<GoFilter />
-								<span>Filter</span>
-							</button>
-							{isOpen && (
-								<section className={styles.listContainer}>
-									<ul className={styles.filterList}>
-										<li>
-											<button
-												className={styles.btn}
-												onClick={handleFilterReset}
-											>
-												All
-											</button>
-										</li>
-										<li>
-											<button
-												className={styles.btn}
-												onClick={handleFilterByLowestPrice}
-											>
-												<span>Price</span> <span>(low-high)</span>
-											</button>
-										</li>
-										<li>
-											<button
-												className={styles.btn}
-												onClick={handleFilterByHighestPrice}
-											>
-												<span>Price</span> <span>(high-low)</span>
-											</button>
-										</li>
-										<li>
-											<button
-												className={styles.btn}
-												// onClick={() =>
-												// 	setIsPackageTypesOpen(!isPackageTypesOpen)
-												// }
-											>
-												<span>package type</span>
-											</button>
-											{/* {isPackageTypesOpen && (
-												<section className={styles.filterOptions}>
-													{packageType.map((item, idx) => (
-														<button
-															onClick={() => handleFilterByPackageType(item)}
-															key={idx}
-														>
-															{item}
-														</button>
-													))}
-												</section>
-											)} */}
-										</li>
-									</ul>
-								</section>
-							)}
-						</section>
+						{/* FILTER COMPONENT */}
+						<Filter
+						packageType={packageType}
+							filterBy={filterBy}
+							
+						toggleFilterOptions={isFilterOptionsOpen}
+						togglePackageTypesOptions={isFilterByPackageTypesOpen}
+						onHandleTogglePackageTypesOptions={handleTogglePackageTypesOptions}
+						onHandleFilterToggle={handleFilterToggle}
+						onHandleFilterReset={handleFilterReset}
+						onHandleFilterByPackageType={handleFilterByPackageType}
+						onHandleFilterByHighestPrice={handleFilterByHighestPrice}
+						onHandleFilterByLowestPrice={handleFilterByLowestPrice}
+					/>
+						
 					</header>
 				)}
 
-				{hasSearchQuery && (
-					<button onClick={handleFilterReset} className={styles.btn}>
+				{isBackButton && filteredFlights?.length !== 0 && (
+					<button onClick={handleBackButtonReset} className={styles.btn}>
 						Back
 					</button>
 				)}
 
 				<section className={styles.packageList}>
 					{filteredFlights?.map((flight_package) => (
-						<Link to={ `/app/flights/${flight_package.id}`}  key={flight_package.id}>
-							<section
-							
-							className={`${styles.card} ${hasSearchQuery ? "card_size" : ""}`}
-							onClick={() => handleSelectedPackage(flight_package.id)}
+						<Link
+							to={`/app/flights/${flight_package.id}`}
+							key={flight_package.id}
 						>
-							<section className={styles.card__header}>
-								<img
-									src={`/images/flights/${flight_package.image_url}`}
-									alt=""
-								/>
+							<section
+								className={`${styles.card} ${
+									filteredFlights?.length < 3 ? "card_size" : ""
+								}`}
+							>
+								<section className={styles.card__header}>
+									<img
+										src={`/images/flights/${flight_package.image_url}`}
+										alt=""
+									/>
 
-								<p>
-									<span>Duration: </span>
-									<span>{flight_package.duration}</span>
-								</p>
+									<p>
+										<span>Duration: </span>
+										<span>{flight_package.duration}</span>
+									</p>
+								</section>
+								<section className={styles.card__body}>
+									<h1>
+										<span>{flight_package.airline}</span>
+									</h1>
+									<ul>
+										<li>
+											<IoBriefcase />
+											<p>
+												class: <span>{flight_package.service_tier}</span>
+											</p>
+										</li>
+										<li>
+											<CiLocationOn />
+											<p>
+												Destination: <span>{flight_package.arrival_city}</span>
+											</p>
+										</li>
+										<li>
+											<GiMoneyStack />
+											<p>
+												price:{" "}
+												<span>
+													₦
+													{new Intl.NumberFormat().format(flight_package.price)}
+												</span>
+											</p>
+										</li>
+										<li>
+											<MdAirlineSeatReclineNormal />
+											<p>
+												available seats:{" "}
+												<span>{flight_package.available_seats}</span>
+											</p>
+										</li>
+									</ul>
+								</section>
 							</section>
-							<section className={styles.card__body}>
-								<h1>
-									<span>{flight_package.airline}</span>
-								</h1>
-								<ul>
-									<li>
-										<IoBriefcase />
-										<p>
-											class: <span>{flight_package.class}</span>
-										</p>
-									</li>
-									<li>
-										<CiLocationOn />
-										<p>
-											Destination: <span>{flight_package.arrival_city}</span>
-										</p>
-									</li>
-									<li>
-										<GiMoneyStack />
-										<p>
-											price:{" "}
-											<span>
-												₦{new Intl.NumberFormat().format(flight_package.price)}
-											</span>
-										</p>
-									</li>
-									<li>
-										<MdAirlineSeatReclineNormal />
-										<p>
-											available seats:{" "}
-											<span>{flight_package.available_seats}</span>
-										</p>
-									</li>
-								</ul>
-							</section>
-						</section>
 						</Link>
 					))}
 				</section>
-
 			</section>
 		</section>
 	);

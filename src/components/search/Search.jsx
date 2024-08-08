@@ -89,8 +89,8 @@ function Search({ page }) {
 										<input
 											type="radio"
 											id="economy"
-											value="economy"
-											{...register('class')}
+											value="Economy"
+											{...register('service_tier')}
 										/>
 										<label htmlFor="economy">Economy</label>
 									</section>
@@ -98,8 +98,8 @@ function Search({ page }) {
 										<input
 											type="radio"
 											id="premiumEconomy"
-											value="premiumEconomy"
-											{...register('class')}
+											value="Premium Economy"
+											{...register('service_tier')}
 										/>
 										<label htmlFor="premiumEconomy">Premium Economy</label>
 									</section>
@@ -107,8 +107,8 @@ function Search({ page }) {
 										<input
 											type="radio"
 											id="business"
-											value="business"
-											{...register('class')}
+											value="Business"
+											{...register('service_tier')}
 										/>
 										<label htmlFor="business">Business</label>
 									</section>
@@ -116,8 +116,8 @@ function Search({ page }) {
 										<input
 											type="radio"
 											id="firstClass"
-											value="firstClass"
-											{...register('class')}
+											value="First Class"
+											{...register('service_tier')}
 										/>
 										<label htmlFor="firstClass">First Class</label>
 									</section>

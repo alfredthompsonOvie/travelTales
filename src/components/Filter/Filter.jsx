@@ -1,37 +1,39 @@
 /* eslint-disable react/prop-types */
 import { GoFilter } from "react-icons/go";
 import styles from "./Filter.module.css";
-import { useState } from "react";
+
 function Filter({
-	isOpen,
-	handleFilterToggle,
-	handleFilterReset,
-	handleFilterByHighestPrice,
-	handleFilterByLowestPrice,
-	handleFilterByPackageType,
-  packageType,
+	onHandleFilterReset,
+	onHandleFilterByHighestPrice,
+	onHandleFilterByLowestPrice,
+	onHandleFilterByPackageType,
+	onHandleFilterToggle,
+	packageType,
+	toggleFilterOptions,
+	togglePackageTypesOptions,
+	onHandleTogglePackageTypesOptions,
+	filterBy
 }) {
 
-	const [isPackageTypesOpen, setIsPackageTypesOpen] = useState(false);
 
 	return (
 		<section className={styles.filterContainer}>
-			<button className={styles.btn} onClick={handleFilterToggle}>
+			<button className={styles.btn} onClick={onHandleFilterToggle}>
 				<GoFilter />
-				<span>Filter</span>
+				<span>{filterBy}</span>
 			</button>
-			{isOpen && (
+			{toggleFilterOptions && (
 				<section className={styles.listContainer}>
 					<ul className={styles.filterList}>
 						<li>
-							<button className={styles.btn} onClick={handleFilterReset}>
+							<button className={styles.btn} onClick={onHandleFilterReset}>
 								All
 							</button>
 						</li>
 						<li>
 							<button
 								className={styles.btn}
-								onClick={handleFilterByLowestPrice}
+								onClick={onHandleFilterByLowestPrice}
 							>
 								<span>Price</span> <span>(low-high)</span>
 							</button>
@@ -39,7 +41,7 @@ function Filter({
 						<li>
 							<button
 								className={styles.btn}
-								onClick={handleFilterByHighestPrice}
+								onClick={onHandleFilterByHighestPrice}
 							>
 								<span>Price</span> <span>(high-low)</span>
 							</button>
@@ -47,15 +49,15 @@ function Filter({
 						<li>
 							<button
 								className={styles.btn}
-								onClick={() => setIsPackageTypesOpen(!isPackageTypesOpen)}
+								onClick={onHandleTogglePackageTypesOptions}
 							>
 								<span>package type</span>
 							</button>
-							{isPackageTypesOpen && (
+							{togglePackageTypesOptions && (
 								<section className={styles.filterOptions}>
 									{packageType.map((item, idx) => (
 										<button
-											onClick={() => handleFilterByPackageType(item)}
+											onClick={() => onHandleFilterByPackageType(item)}
 											key={idx}
 										>
 											{item}
